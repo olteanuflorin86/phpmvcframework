@@ -1,0 +1,13 @@
+{
+	"name" : "florin/phpmvc-framework",
+	"authors" : [{
+			"name" : "olteanuflorin86",
+			"email" : "olteanuflorin86@gmail.com"
+		}
+	],
+	"autoload" : {
+		"psr-4" : {
+			"app\\" : "./"
+		}
+	}
+}
