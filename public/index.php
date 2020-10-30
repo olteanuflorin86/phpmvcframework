@@ -11,9 +11,17 @@
         return 'Hello World';
     });
     
+       
+    $app->router->get('/home', 'home');
+    
     $app->router->get('/contact', 'contact');
     
-    $app->router->get('/home', 'home');
+    $app->router->post('/contactForm', function() {
+        return (
+            "<h1>Contact Form</h1>"
+        );
+    });  
+    
     
     $app->run();
     
