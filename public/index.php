@@ -16,16 +16,11 @@
     
     $app->router->get('/contact', 'contact');
     
-    $app->router->post('/contactForm', function() {
-        return (
-            "<h1>Contact Form</h1>"
-        );
+    $app->router->post('/contact', function() {
+        return 'post request';
     });  
     
-    
     $app->run();
-    
-    
     
 
 ?>
