@@ -15,7 +15,8 @@
        
     $app->router->get('/home', 'home');
     
-    $app->router->get('/contact', 'contact');
+    //$app->router->get('/contact', 'contact');
+    $app->router->get('/contact', [SiteController::class, 'contact']);
     
     $app->router->post('/contact', [SiteController::class, 'handleContact']);  
     
