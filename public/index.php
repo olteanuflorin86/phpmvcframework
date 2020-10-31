@@ -3,6 +3,7 @@
     require_once __DIR__.'/../vendor/autoload.php';
     
     // If we write the line below we can create an instance of Application in this file
+    use app\controllers\SiteController;
     use app\core\Application;
     
     $app = new Application(dirname(__DIR__));    
@@ -16,9 +17,7 @@
     
     $app->router->get('/contact', 'contact');
     
-    $app->router->post('/contact', function() {
-        return 'post request';
-    });  
+    $app->router->post('/contact', [SiteController::class, 'handleContact']);  
     
     $app->run();
     
