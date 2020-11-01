@@ -22,5 +22,29 @@ class Request
         
     }
     
+    public function getBody() {
+        
+        $body = [];
+        
+        // we make the sanitize for get and post below
+        
+        if($this->getMethod() === 'get') {   
+            echo 'get method';
+            foreach($_GET as $key => $value) {                
+                $body[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
+            }
+        }
+        
+        if($this->getMethod() === 'post') {
+            echo 'post method';
+            foreach($_POST as $key => $value) {
+                $body[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS);
+            }
+        }
+        
+        return $body;
+        
+    }
+    
 }
 
