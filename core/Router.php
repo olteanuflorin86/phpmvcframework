@@ -80,10 +80,29 @@ class Router
     
     protected function renderOnlyView(string $view, $params) {
         
+        /*
         echo '<pre>';
         var_dump($params);
         echo '</pre>';
         exit;
+        */
+        
+        foreach($params as $key => $value) {
+            // $key is variable $name from home.php, $value it is the actual value of $name 
+            $$key = $value;
+            // $key is name string
+            // if $key evaluates as name, $$key is evaluated as name variable...
+            // , and we can use that name variable forward ($name), like at commented var_dump bellow
+            
+        }
+        /*
+        echo '<pre>';
+        var_dump($name);
+        echo '</pre>';
+        exit;
+        */
+        
+        // the include will see $name... so it will include it in home.php...
         
         ob_start();
         include_once Application::$ROOT_DIR."/views/$view.php";
