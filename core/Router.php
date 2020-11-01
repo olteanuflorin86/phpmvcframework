@@ -46,6 +46,19 @@ class Router
         if(is_string($callback)) {
             return $this->renderView($callback);
         }
+        if(is_array($callback)) {
+            //$baseControllerInstance = new $callback[0]();
+            //$callback[0] = $baseControllerInstance;
+            $callback[0] = new $callback[0]();
+        }
+        
+        /*
+        echo '<pre>';
+        var_dump($callback);
+        echo '</pre>';
+        exit;
+        */
+        
         // if there is callback we need to execute this callback with call_user_func
         // The callback will return some string - because function() in index.php returns for ex Hello World
         // if we acces "/" (home page) we see Hello World
@@ -95,12 +108,6 @@ class Router
             // , and we can use that name variable forward ($name), like at commented var_dump bellow
             
         }
-        /*
-        echo '<pre>';
-        var_dump($name);
-        echo '</pre>';
-        exit;
-        */
         
         // the include will see $name... so it will include it in home.php...
         
