@@ -6,6 +6,17 @@ use app\core\Application;
 
 class SiteController {
     
+    public function home() {
+        
+        $params = [
+            
+            'name' => "Florin"
+        
+        ];
+        // we are rendering home page - the first parameter
+        return Application::$app->router->renderView('home', $params);
+    }
+    
     public function contact() {
         return Application::$app->router->renderView('contact');
     }

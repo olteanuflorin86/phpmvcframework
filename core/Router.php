@@ -42,6 +42,7 @@ class Router
             //return $this->renderContent("Not found");
             return $this->renderView("_404");
         } 
+        // this is for rendering views, not for clojures:
         if(is_string($callback)) {
             return $this->renderView($callback);
         }
@@ -52,15 +53,17 @@ class Router
 
     }
     
-    public function renderView($view) {
+    public function renderView($view, $params = []) {
         
         $layoutContent = $this->layoutContent();
-        $viewContent = $this->renderOnlyView($view);
+        $viewContent = $this->renderOnlyView($view, $params);
         
         return str_replace('{{content}}', $viewContent, $layoutContent);
         
     }
     
+    // we don't use it anymore now, we used to in resolve function above
+    // it can be used to publish a message
     public function renderContent($viewContent) {
         
         $layoutContent = $this->layoutContent();
@@ -75,7 +78,13 @@ class Router
         return ob_get_clean();
     }
     
-    protected function renderOnlyView(string $view) {
+    protected function renderOnlyView(string $view, $params) {
+        
+        echo '<pre>';
+        var_dump($params);
+        echo '</pre>';
+        exit;
+        
         ob_start();
         include_once Application::$ROOT_DIR."/views/$view.php";
         return ob_get_clean();
