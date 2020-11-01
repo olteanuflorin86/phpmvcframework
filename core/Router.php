@@ -62,7 +62,7 @@ class Router
         // if there is callback we need to execute this callback with call_user_func
         // The callback will return some string - because function() in index.php returns for ex Hello World
         // if we acces "/" (home page) we see Hello World
-        return call_user_func($callback);
+        return call_user_func($callback, $this->request);
 
     }
     
