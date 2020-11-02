@@ -1,15 +1,17 @@
 <?php
 namespace app\models;
 
-class RegisterModel {
+use app\core\Model;
+
+class RegisterModel extends Model {
     
-    private string $firstName;
-    private string $lastName;
-    private string $email;
-    private string $password;
-    private string $confirmPassword;
+    public string $firstName;
+    public string $lastName;
+    public string $email;
+    public string $password;
+    public string $confirmPassword;
     
-    
+    /*
     public function getFirstName() {
         return $this->firstName;
     }
@@ -52,6 +54,13 @@ class RegisterModel {
 
     public function setConfirmPassword($confirmPassword) {
         $this->confirmPassword = $confirmPassword;
+    }
+    */
+    
+    public function register() {
+        
+        echo "Creating new user";
+        
     }
     
 

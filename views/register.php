@@ -6,9 +6,9 @@
 <!-- The data will be accessed with getBody method that uses $_POST inside -->
 <form action="" method="post">
     <label>First Name</label><br>
-    <input type="text" name="firstname"><br>
+    <input type="text" name="firstName"><br>
     <label>Last Name</label><br>
-    <input type="text" name="lastname"><br>
+    <input type="text" name="lastName"><br>
     <label>Email</label><br>
     <input type="email" name="email"><br>
     <label>Password</label><br>
