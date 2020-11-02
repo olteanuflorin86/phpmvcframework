@@ -46,6 +46,7 @@ class Router
         if(is_string($callback)) {
             return $this->renderView($callback);
         }
+        // this is for controllers...
         if(is_array($callback)) {
             //$baseControllerInstance = new $callback[0]();
             //$callback[0] = $baseControllerInstance;
@@ -64,10 +65,12 @@ class Router
         // if there is callback we need to execute this callback with call_user_func
         // The callback will return some string - because function() in index.php returns for ex Hello World
         // if we acces "/" (home page) we see Hello World
+        // this was for clojures...
         return call_user_func($callback, $this->request);
 
     }
     
+    // this is for rendering views inside layouts
     public function renderView($view, $params = []) {
         
         $layoutContent = $this->layoutContent();
@@ -87,6 +90,7 @@ class Router
         
     }
     
+    // this is for render layouts
     protected function layoutContent() {
         $layout = Application::$app->getController()->layout;
         ob_start();
@@ -94,6 +98,7 @@ class Router
         return ob_get_clean();
     }
     
+    // this if for rendering views and maybe parameters
     protected function renderOnlyView(string $view, $params) {
         
         /*

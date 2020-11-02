@@ -45,14 +45,12 @@ class Request
         // we make the sanitize for get and post below
         
         if($this->method() === 'get') {   
-            echo 'get method';
             foreach($_GET as $key => $value) {                
                 $body[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
             }
         }
         
         if($this->method() === 'post') {
-            echo 'post method';
             foreach($_POST as $key => $value) {
                 $body[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS);
             }

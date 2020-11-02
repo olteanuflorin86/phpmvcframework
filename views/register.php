@@ -2,6 +2,8 @@
 ?>
 
 <h2>Register</h2><br>
+<!-- I think that it will send the data to register function in AuthController and we can access it from there -->
+<!-- The data will be accessed with getBody method that uses $_POST inside -->
 <form action="" method="post">
     <label>First Name</label><br>
     <input type="text" name="firstname"><br>

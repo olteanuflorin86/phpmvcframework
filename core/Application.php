@@ -3,12 +3,14 @@ namespace app\core;
 
 class Application 
 {    
+    // so we don't have to use always __DiR__ and stuff...: 
     public static string $ROOT_DIR;
     
     public Router $router;
     public Request $request;
     public Response $response;
     
+    // we need a handler:
     public static Application $app;
     
     private Controller $controller;
