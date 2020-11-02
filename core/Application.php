@@ -11,9 +11,12 @@ class Application
     
     public static Application $app;
     
+    private Controller $controller;
+    
     public function __construct($rootPath) {
         
         self::$ROOT_DIR = $rootPath;
+        // this is why we create a static Application field, to have a handler:
         self::$app = $this;
         
         $this->request = new Request();
@@ -22,6 +25,16 @@ class Application
         $this->router = new Router($this->request, $this->response);
         
     } 
+    
+    
+    public function getController() {
+        return $this->controller;
+    }
+    
+    public function setController(Controller $controller) {
+        $this->controller = $controller;
+    }
+    
     
     public function run() {
         

@@ -34,7 +34,7 @@ class Router
         // we will determine what is the current path (url path) and what is the current method
         // based on this we will take the proper route and return the result tot the user
         $path = $this->request->getPath();
-        $method = $this->request->getMethod();
+        $method = $this->request->method();
         $callback = $this->routes[$method][$path] ?? false;
         if($callback === false) {
             //Application::$app->response->setStatusCode(404);
@@ -49,7 +49,9 @@ class Router
         if(is_array($callback)) {
             //$baseControllerInstance = new $callback[0]();
             //$callback[0] = $baseControllerInstance;
-            $callback[0] = new $callback[0]();
+            // it is not ok to have controller public if we have get and set for it...
+            Application::$app->setController(new $callback[0]());
+            $callback[0] = Application::$app->getController();
         }
         
         /*
@@ -86,8 +88,9 @@ class Router
     }
     
     protected function layoutContent() {
+        $layout = Application::$app->getController()->layout;
         ob_start();
-        include_once Application::$ROOT_DIR."/views/layouts/main.php";
+        include_once Application::$ROOT_DIR."/views/layouts/$layout.php";
         return ob_get_clean();
     }
     
