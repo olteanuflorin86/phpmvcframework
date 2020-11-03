@@ -33,23 +33,39 @@ abstract class Model {
         // validate will be called after loadData
 
         foreach($this->rules() as $attribute => $rules) {
-            // qw iterate over all the values/fields we get from Register form
+            // EX $this->rules(): combination of required, email, min, etc
+            // EX attribute: firstName
+            // EX rules: required
+            // we iterate over all the values/fields we get from Register form
             // value is the value of the attribute, like the value of firstName 
             $value = $this->{$attribute};
-            //echo $value;
+            // EX value: Florin
             foreach($rules as $rule) {
                 // each rule can be a constant/string or an array
                 $ruleName = $rule;
+                // EX ruleName: required, email, Array(not string)
                 if(!is_string($ruleName)) {
                     // rule[0] is the rule name
-                    $ruleName = $rule[0];                    
+                    $ruleName = $rule[0];  
+                    // EX rule[0]: min, max, match
                 }
                 if($ruleName === self::RULE_REQUIRED && !$value) {
                     // first we have RULE_REQUIRED for firstname
                     // we want to add errors to an attribute, the error will be of type RULE_...
                     $this->addError($attribute, self::RULE_REQUIRED);
                 }
-                
+                if($ruleName === self::RULE_EMAIL && !filter_var($value, FILTER_VALIDATE_EMAIL)) {                
+                    $this->addError($attribute, self::RULE_EMAIL);                       
+                }
+                if($ruleName === self::RULE_MIN && strlen($value) < $rule['min']) {
+                    $this->addError($attribute, self::RULE_MIN, $rule);   
+                }
+                if($ruleName === self::RULE_MAX && strlen($value) > $rule['max']) {
+                    $this->addError($attribute, self::RULE_MAX, $rule);
+                }
+                if($ruleName === self::RULE_MATCH && $value !== $this->{$rule['match']}) {
+                    $this->addError($attribute, self::RULE_MATCH, $rule);
+                }
                 
                 
             }
@@ -57,7 +73,7 @@ abstract class Model {
         }
         
         if(empty($this->errors)) {
-            // there are no errors in the errors array, addError was never called
+            // there are no errors in the errors array, addError was never called 
             return true;
         } else {
             return false;
@@ -65,12 +81,15 @@ abstract class Model {
         
     }
     
-    public function addError(string $attribute, string $rule) {
+    public function addError(string $attribute, string $rule, $params = []) {
         
         $message = $this->errorMessages()[$rule] ?? '';
         // here we add the errors to the errors array
         // each field/ property can have multiple errors (not all)
         // we will check all the attributes and assign existing errors per attribute
+        foreach($params as $key => $value) {
+            $message = str_replace("{{$key}}", $value, $message);
+        }
         $this->errors[$attribute][] = $message; 
         
         
