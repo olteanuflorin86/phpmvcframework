@@ -1,6 +1,7 @@
 <?php
 namespace app\core;
 
+
 abstract class Model {
     
     public const RULE_REQUIRED = 'required';
@@ -8,6 +9,7 @@ abstract class Model {
     public const RULE_MIN = 'min';
     public const RULE_MAX = 'max';
     public const RULE_MATCH = 'match';
+    
     
     public function loadData($data) {
         // first we iterate over the data
@@ -22,11 +24,14 @@ abstract class Model {
         
     }
     
+    
     // this function that should be overriden will return an array
     abstract public function rules(): array;
     
+    
     // this array will gather all the errors from validation
     public array $errors = [];
+    
     
     public function validate() {
         
@@ -81,6 +86,7 @@ abstract class Model {
         
     }
     
+    
     public function addError(string $attribute, string $rule, $params = []) {
         
         $message = $this->errorMessages()[$rule] ?? '';
@@ -95,6 +101,7 @@ abstract class Model {
         
     }
     
+    
     public function errorMessages() {
         
         return [
@@ -105,6 +112,20 @@ abstract class Model {
             self::RULE_MAX => 'Max length of this field must be {max}',
             self::RULE_MATCH => 'This field must be the same as {match}',
         ];
+        
+    }
+    
+    
+    public function hasError(string $attribute) {
+        
+        return $this->errors[$attribute] ?? false;
+         
+    }
+    
+    // there might be more than just one error...
+    public function getFirstError($attribute) {
+        
+        return $this->errors[$attribute][0] ?? false;
         
     }
     

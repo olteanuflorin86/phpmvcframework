@@ -18,6 +18,7 @@ class SiteController extends Controller {
         // we are rendering home page - the first parameter
         //return Application::$app->router->renderView('home', $params);
         return $this->render('home', $params);
+        // we wanted to render views from here, from the controller
     }
     
     public function contact() {
@@ -27,12 +28,12 @@ class SiteController extends Controller {
     public function handleContact(Request $request) {
         
         $body = $request->getBody();
-        
+        /*
         echo '<pre>';
         var_dump($body);
         echo '</pre>';
         exit;
-        
+        */
         return 'Handling submitted data';
     }
     

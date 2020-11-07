@@ -1,2 +1,7 @@
-<h1>Home</h1>
-<h3><?php echo $name;?></h3>
+<?php 
+
+namespace app\views;
+
+?>
+
+<h1>Welcome <?php echo $name; ?> </h1>
